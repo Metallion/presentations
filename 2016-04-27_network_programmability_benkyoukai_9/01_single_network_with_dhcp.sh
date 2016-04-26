@@ -11,8 +11,6 @@ EOS
 
 vnctl networks add --uuid "nw-vnet1" --display_name "vnet1" --ipv4_network "10.101.0.0" --ipv4_prefix "24" --domain_name "vnet1" --network_mode "virtual"
 
-#vnctl topologies networks add topo-vnet nw-vnet1
-
 vnctl datapaths networks add dp-1 nw-vnet1 --interface_uuid "if-dp1eth0" --mac_address "02:00:00:aa:00:01"
 vnctl datapaths networks add dp-2 nw-vnet1 --interface_uuid "if-dp2eth0" --mac_address "02:00:00:bb:00:01"
 vnctl datapaths networks add dp-3 nw-vnet1 --interface_uuid "if-dp3eth0" --mac_address "02:00:00:cc:00:01"
