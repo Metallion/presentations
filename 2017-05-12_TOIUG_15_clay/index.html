@@ -85,6 +85,72 @@
             <!--Fry shocked-->
             <img height="70%" width="70%" src="http://sujanpatel.com/wp-content/uploads/2012/12/stress.jpg" alt="stress">
           </section>
+
+          <section>
+            <p>A faulty change can result in</p>
+            <ul>
+              <li>Down time</li>
+              <li>Security leaks</li>
+            </ul>
+            <p>The problem can take a long time to debug, further increasing down time</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>How do we solve it?</h3>
+            <p>The same idea as software CI</p>
+            <p>Plan =&#62; Code =&#62; Build =&#62; Test =&#62; Deploy =&#62; Repeat</p>
+          </section>
+
+          <section>
+            <h3>But how?</h3>
+            <p>Make a virtual copy of the production network</p>
+            <p>using clay</p>
+            <img src="https://github.com/qb0C80aE/pottery/raw/develop/images/sample2.png" alt="Clay screenshot">
+          </section>
+
+          <section>
+            <h3>Clay</h3>
+            <p>Clay is:</p>
+            <ul>
+              <li>Open source</li>
+              <li>Written in go</li>
+              <li>Written by qb0C80aE</li>
+              <a target="_blank" href="https://github.com/qb0C80aE/clay">https://github.com/qb0C80aE/clay</a>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Clay</h3>
+            <p>Clay can:</p>
+            <ul>
+              <li>Design and build the virtual network</li>
+              <li>Display visual network diagram</li>
+              <li>Design test cases and generate their code</li>
+              <li>Integrate physical devices in the virtual network</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Clay</h3>
+            <p>Clay uses:</p>
+            <ul>
+                <li>Terraform + git</li>
+                <li>OpenVDC</li>
+                <li>OpenVNet</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Integrate physical devices?</h4>
+            <p>Some times a physical device needs to be tested</p>
+            <ul>
+              <li>Buy another one of *only* this device</li>
+              <li>Simulate the rest of the network in Clay</li>
+              <li>Have Clay send commands to both the physical device and the virtual network</li>
+            </ul>
+          </section>
         </section>
 
       </div><!--slides-->
