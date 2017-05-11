@@ -153,12 +153,47 @@
         </section>
 
         <section>
-          <img height="650" src="images/clay_nagare.svg" alt="clay diagram" />
-        </section>
+          <section>
+            <h3>Interface</h3>
+            <p>Humans can use a web GUI (pottery)</p>
+            <p>Scripts can bypass the GUI and call a REST api</p>
+          </section>
 
-        <section>
-          <p>The combination of these technologies is called</p>
-          <h3>Liquid Metal</h3>
+          <section>
+            <h3>Terraform</h3>
+            <p>Terraform is a orchestration tool that allows you to write infrastructure as code.</p>
+            <a href="https://www.terraform.io/">https://www.terraform.io/</a>
+          </section>
+
+          <section>
+            <p>Clay generates a terraform template describing the virtual network.</p>
+            <p>Clay also generates the code to automatically run test cases.</p>
+          </section>
+
+          <section>
+            <h3>Git</h3>
+            <p>This generated code is committed into git.</p>
+          </section>
+
+          <section>
+            <h3>Jenkins</h3>
+            <p>The popular Jenkins CI suite periodically polls the git repository.</p>
+            <p>When there are changes to the code, Jenkins applies the terraform template and then runs test cases</p>
+          </section>
+
+          <section>
+            <h3>OpenVDC + OpenVNet</h3>
+            <p>Terraform will boot virtual servers using OpenVDC and arrange them in virtual networks using OpenVNet</p>
+          </section>
+
+          <section>
+            <img height="650" src="images/clay_nagare.svg" alt="clay diagram" />
+          </section>
+
+          <section>
+            <p>The combination of these technologies is called</p>
+            <h3>Liquid Metal</h3>
+          </section>
         </section>
 
         <section>
