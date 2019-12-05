@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/beige.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h3>Container Networking p1</h3>
+          <h5>Understanding Error Messages</h5>
+          <img alt="title card" src="img/title.jpg" />
+        </section>
+
+        <section>
+          <h3>Who am I?</h3>
+          <table><tr>
+              <td width="33%">
+                <p>a metal fan</p>
+                <img alt="metal fan" src="img/metal_fan.jpg" />
+              </td>
+              <td width="33%">
+                <p>a programmer</p>
+                <img alt="programmer" src="img/programmer.jpg" />
+              </td>
+              <td width="33%">
+                <p>a gamer</p>
+                <img alt="gamer" src="img/gamer.jpg" />
+              <td>
+          </tr></table>
+        </section>
+
+        <section>
+          <h3>The OSI model</h3>
+          <img alt="The OSI model" src="img/osi.jpg" width="70%" />
+        </section>
+
+        <section>
+          <h3>Layer 1</h3>
+          <h5>The Physical Layer</h5>
+          <img alt="L1" src="img/L1.svg" />
+          <p>Send ones and zeroes along a cable</p>
+        </section>
+
+        <section>
+          <h3>Layer 2</h3>
+          <h5>The Data Link Layer</h5>
+          <img alt="L2" src="img/L2.png" />
+          <ul>
+            <li>Broadcast ethernet <i>frames</i> through switches</li>
+            <li>Use <i>MAC addresses</i> to determine which frames to accept</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Layer 3</h3>
+          <h5>The Network Layer</h5>
+          <img alt="L3" src="img/L3.png" height="250" />
+          <ul>
+            <li>Send IP <i>packets</i> through routers</li>
+            <li>Use IP addresses to determine destination</li>
+            <li>Use routing tables and subnet masks to determine route</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Layer 4</h3>
+          <h5>The Transport Layer</h5>
+          <ul>
+            <li>Just software on top of L3. No new hardware</li>
+            <li>Send ICMP <i>datagrams</i>, UDP <i>datagrams</i> or TCP <i>segments</i> over IP</li>
+            <li>UDP and TCP help us determine which application traffic is intended for by use of ports.</li>
+          </ul>
+        </section>
+
+        <section>
+          <img alt="lab" src="img/lab.png"/>
+        </section>
+    <script src="js/reveal.js"></script>
+    <script>
+      Reveal.initialize();
+    </script>
+  </body>
+</html>
