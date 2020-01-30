@@ -1,0 +1,7 @@
+https://blog.scottlowe.org/2013/09/04/introducing-linux-network-namespaces/
+
+ip netns add blue
+
+ip link add veth0 type veth peer name veth1
+
+ip link set veth1 netns blue

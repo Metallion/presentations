@@ -1,0 +1,196 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/beige.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h3>Network Namespaces</h3>
+          <h5>What Docker Does Behind The scenes</h5>
+          <img alt="title card" src="img/title.jpg" />
+        </section>
+
+        <section>
+          <h3>Who am I?</h3>
+          <table><tr>
+              <td width="33%">
+                <p>a metal fan</p>
+                <img alt="metal fan" src="img/metal_fan.jpg" />
+              </td>
+              <td width="33%">
+                <p>a programmer</p>
+                <img alt="programmer" src="img/programmer.jpg" />
+              </td>
+              <td width="33%">
+                <p>a gamer</p>
+                <img alt="gamer" src="img/gamer.jpg" />
+              <td>
+          </tr></table>
+        </section>
+
+        <section>
+          <section>
+            <h3>What are containers?</h3>
+            <p>Definitely not virtual machines.</p>
+          </section>
+
+          <section>
+            <h3>What are containers?</h3>
+            <p>A combination of three things.</p>
+            <ul>
+              <li>Chroot</li>
+              <li>Control Groups</li>
+              <li>Network Namespaces</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h5>Default network namespace</h5>
+            <img alt="main namespace" src="img/default_namespace.svg" />
+          </section>
+
+          <section>
+            <h5>Default network namespace</h5>
+            <p>Just executing a process puts it in here.</p>
+            <pre>
+&gt ip link show
+&gt ping 8.8.8.8
+            </pre>
+            <img alt="default namespace" src="img/default_namespace_processes.svg" />
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h5>Creating a new namespace</h5>
+            <pre>
+&gt ip netns add blue
+            </pre>
+            <img alt="blue namespace" src="img/new_blue_namespace.svg" />
+          </section>
+
+          <section>
+            <p>Processes still go to default namespace</p>
+            <pre>
+&gt ping 8.8.8.8
+            </pre>
+            <img alt="default namespace process" src="img/new_blue_namespace_process.svg" />
+          </section>
+
+          <section>
+            <p>start a process in the new namespace</p>
+            <pre>
+&gt ip netns exec blue ip link show
+&gt ip netns exec blue ping 8.8.8.8
+            </pre>
+            <img alt="blue namespace process" src="img/new_blue_namespace_process_in_namespace.svg" />
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>Veth Pairs</h3>
+            <p>Two virtual NICs connected by a virtual cable.</p>
+            <pre>
+&gt ip link add blue0out type veth peer blue0in
+            </pre>
+            <img alt="veth pairs" src="img/veth_pairs.svg" />
+          </section>
+
+          <section>
+            <h3>Veth Pairs</h3>
+            <p>Using them to connect namespaces</p>
+            <pre>
+&gt ip link set blue0in netns blue
+            </pre>
+            <img alt="veth pairs connecting namespaces" src="img/veth_pairs_connected.svg" />
+          </section>
+
+          <section>
+            <h3>Veth Pairs</h3>
+            <p>Assign them IPs like any other interface</p>
+            <pre>
+&gt ip netns exec blue ip addr add 10.0.0.10/24 dev blue0in
+&gt ip addr add 10.0.0.1/24 dev blue0in
+            </pre>
+            <img alt="veth pairs with IP" src="img/veth_pairs_with_ip.svg" />
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>Bridging</h3>
+            <p>Let's...</p>
+            <ul>
+              <li>make a new namespace called red</li>
+              <li>connect red and blue using a bridge</li>
+            </ul>
+          </section>
+
+          <section>
+            <pre>
+&gt ip netns add red
+&gt ip link add red0out type veth peer red0in
+&gt ip link set red0in netns red
+&gt ip netns exec red ip addr add 10.0.0.10/24 dev red0in
+&gt ip addr add 10.0.0.11/24 dev red0in
+            </pre>
+            <img alt="red namespace" src="img/red_namespace.svg" />
+          </section>
+
+          <section>
+            <pre>
+&gt brctl addbr br0
+&gt brctl addif br0 blue0out
+&gt brctl addif br0 red0out
+            </pre>
+            <img alt="bridge" src="img/bridge.svg" />
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>Nat</h3>
+            <ul>
+              <li>Translates IP addresses</li>
+              <li>Allows us to route to other networks<br />
+              ... such as the internet.</li>
+            </ul>
+          </section>
+
+          <section>
+            <p>First we need our default namespace IP back</p>
+            <pre>
+&gt ip addr del 10.0.0.1/24 dev blue0out
+&gt ip addr add 10.0.0.1/24 dev br0
+            </pre>
+            <img alt="bridge with ip" src="img/bridge_with_ip.svg" />
+          </section>
+
+          <section>
+            <p>Next we use IPTables to do the NAT</p>
+            <pre>
+&gt iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -j MASQUERADE
+            </pre>
+            <img alt="bridge with nat" src="img/bridge_with_nat.svg" />
+          </section>
+        </section>
+
+        <section>
+          <h3>Questions?</h3>
+          <img alt="questions" src="img/questions.jpg" />
+        </section>
+
+      </div><!--slides-->
+    </div><!--reveal-->
+
+    <script src="js/reveal.js"></script>
+    <script>
+      Reveal.initialize();
+    </script>
+  </body>
+</html>
