@@ -115,7 +115,7 @@
             <p>Assign them IPs like any other interface</p>
             <pre>
 &gt ip netns exec blue ip addr add 10.0.0.10/24 dev blue0in
-&gt ip addr add 10.0.0.1/24 dev blue0in
+&gt ip addr add 10.0.0.1/24 dev blue0out
             </pre>
             <img alt="veth pairs with IP" src="img/veth_pairs_with_ip.svg" />
           </section>
@@ -137,7 +137,6 @@
 &gt ip link add red0out type veth peer red0in
 &gt ip link set red0in netns red
 &gt ip netns exec red ip addr add 10.0.0.10/24 dev red0in
-&gt ip addr add 10.0.0.11/24 dev red0in
             </pre>
             <img alt="red namespace" src="img/red_namespace.svg" />
           </section>
@@ -149,6 +148,15 @@
 &gt brctl addif br0 red0out
             </pre>
             <img alt="bridge" src="img/bridge.svg" />
+          </section>
+
+          <section>
+            <p>Getting our default namespace IP back</p>
+            <pre>
+&gt ip addr del 10.0.0.1/24 dev blue0out
+&gt ip addr add 10.0.0.1/24 dev br0
+            </pre>
+            <img alt="bridge with ip" src="img/bridge_with_ip.svg" />
           </section>
         </section>
 
@@ -163,18 +171,21 @@
           </section>
 
           <section>
-            <p>First we need our default namespace IP back</p>
+            <p>We use IPTables to do the NAT<br /> and update the namespaces' routing tables</p>
             <pre>
-&gt ip addr del 10.0.0.1/24 dev blue0out
-&gt ip addr add 10.0.0.1/24 dev br0
+&gt iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -j MASQUERADE
+
+&gt ip netns exec blue ip route add default via 10.0.0.1
+&gt ip netns exec red ip route add default via 10.0.0.1
             </pre>
-            <img alt="bridge with ip" src="img/bridge_with_ip.svg" />
           </section>
 
           <section>
-            <p>Next we use IPTables to do the NAT</p>
             <pre>
 &gt iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -j MASQUERADE
+
+&gt ip netns exec blue ip route add default via 10.0.0.1
+&gt ip netns exec red ip route add default via 10.0.0.1
             </pre>
             <img alt="bridge with nat" src="img/bridge_with_nat.svg" />
           </section>
