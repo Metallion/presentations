@@ -171,25 +171,21 @@
           </section>
 
           <section>
-            <p>We use IPTables to do the NAT<br /> and update the namespaces' routing tables</p>
+            <p>We use IPTables to do the NAT</p>
             <pre>
 &gt iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -j MASQUERADE
-
-&gt ip netns exec blue ip route add default via 10.0.0.1
-&gt ip netns exec red ip route add default via 10.0.0.1
             </pre>
+            <img alt="bridge with nat" src="img/bridge_with_nat.svg" />
           </section>
 
           <section>
+            <p>Now we need to tell the namespaces how to route to the internet.</p>
             <pre>
-&gt iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -j MASQUERADE
-
 &gt ip netns exec blue ip route add default via 10.0.0.1
 &gt ip netns exec red ip route add default via 10.0.0.1
             </pre>
             <img alt="bridge with nat" src="img/bridge_with_nat.svg" />
           </section>
-        </section>
 
         <section>
           <h3>Questions?</h3>
