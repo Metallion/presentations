@@ -1,0 +1,192 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/beige.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h3>The Linux Audio Stack</h3>
+          <img alt="title card" src="img/title.jpg" />
+        </section>
+
+        <section>
+          <section>
+            <h3>Who am I?</h3>
+            <table><tr>
+                <td width="33%">
+                  <p>a metal fan</p>
+                  <img alt="metal fan" src="img/metal_fan.jpg" />
+                </td>
+                <td width="33%">
+                  <p>a programmer</p>
+                  <img alt="programmer" src="img/programmer.jpg" />
+                </td>
+                <td width="33%">
+                  <p>a gamer</p>
+                  <img alt="gamer" src="img/gamer.jpg" />
+                <td>
+            </tr></table>
+          </section>
+
+          <section>
+            <h4>I play guitar in a metal band</h4>
+            <a href="https://drakon-prizrak.com">https://drakon-prizrak.com</a>
+            <img width="75%" src="img/drakon.jpg" alt="Drakon Prizrak">
+          </section>
+
+          <section>
+            <h4>This year we released our first EP</h4>
+            <p>
+              recorded using Linux<br>
+              <img width="75%" src="img/drakon_ep.jpeg" alt="Drakon Prizrak"><br>
+              <a href=https://drakonprizrak.bandcamp.com/album/hells-gates target="_blank">
+                https://drakonprizrak.bandcamp.com
+              </a>
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>Sounds complicated?</h3>
+            <h4>It is<h4>
+            <img alt="Audio technologies" src="img/audio_techs.png" width="70%" />
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>OSS</h3>
+            <h5>Open Sound System</h5>
+            <img alt="OSS Diagram" src="img/oss.svg" />
+          </section>
+
+          <section>
+            <h3>OSS</h3>
+            <ul>
+              <li>Used until Linux 2.5</i>
+              <li>Uniform Kernel API for both apps and device drivers</li>
+              <li>Only one audio app could play at a time</li>
+              <li>Pretty much dead now (sorry, die hard fans)</i>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>ALSA</h3>
+            <h5>Advanced Linux Sound Architecture</h5>
+            <img alt="ALSA Diagram" src="img/alsa.svg" />
+          </section>
+
+          <section>
+            <h3>ALSA</h3>
+            <ul>
+              <li>Replaces OSS since Linux 2.6</li>
+              <li>Multiple apps and sound cards can be mixed together</li>
+              <li>Better USB support</li>
+              <li>Bluetooth support</li>
+              <li>Midi devices</li>
+              <li>And more...</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>PulseAudio</h3>
+            <img alt="PulseAudio Diagram" src="img/pulse.svg" />
+          </section>
+
+          <section>
+            <h3>PulseAudio</h3>
+              <ul>
+                <li>An audio server on top of ALSA</li>
+                <li>Much less configuration needed than ALSA</li>
+                <li>Cross platform compatibility<br>(BSD, Linux, Solaris, MacOS, etc.)</li>
+                <li>Easy to play multiple apps though multiple sound cards</li>
+                <li>Hot plug USB sound cards</li>
+              </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>JACK</h3>
+            <h5>JACK Audio Connection Kit</h5>
+            <img alt="JACK Diagram" src="img/jack.svg" />
+          </section>
+
+          <section>
+            <p>Pulse and JACK are not competing</p>
+            <ul>
+              <li>Pulse is for day to day use</li>
+              <li>JACK is for professional audio production</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>JACK</h3>
+              <ul>
+                <li>An audio server on top of ALSA</li>
+                <li>Uses only one sound card</li>
+                <li>Low latency</li>
+                <li>Full control of audio routing</li>
+                <li>For use with DAWs, drum machines, etc.</li>
+                <li>Make apps run perfectly in sync with one another</li>
+              </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>PipeWire</h3>
+            <img alt="Pipewire Diagram" src="img/pipewire.svg" />
+          </section>
+
+          <section>
+            <h3>PipeWire</h3>
+            <ul>
+              <li>Brand new</li>
+              <li>Replaces and in compatible with both Pulse and JACK</li>
+              <li>Use multiple sound cards at once</li>
+              <li>Low latency</li>
+              <li>Full control over audio routing like JACK</li>
+              <li>Simple to use like Pulse (mostly)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>PipeWire</h3>
+            <p>It's been amazing for my online guitar lessons</p>
+            <a href="img/lesson.png" target="_blank"><img alt="Guitar lesson" src="img/lesson.png" /></a>
+          </section>
+
+          <section>
+            <h3>PipeWire</h3>
+            <p>Didn't work quite as wel for:</p>
+            <ul>
+              <li>Using my DAW (it crashed)</li>
+              <li>
+                Hot plugging a USB surround sound card<br>
+                (worked but needed to set up routing manually)
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <h3>Questions</h3>
+          <img alt="questions" src="img/questions.jpg" />
+        </section>
+      </div><!--slides-->
+    </div><!--reveal-->
+
+    <script src="js/reveal.js"></script>
+    <script>
+      Reveal.initialize();
+    </script>
+  </body>
+</html>
